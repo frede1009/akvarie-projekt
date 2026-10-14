@@ -1,0 +1,841 @@
+/* Style Tile: navne og hex-værdier følger designets farvepalette. */
+:root {
+  color-scheme: light;
+  --sort: #000000;
+  --moerkegraa: #3d3a3c;
+  --raahvid: #f5f5f0;
+  --hvid: #ffffff;
+  --lyseroed: #ff97c2;
+  --laks: #fa9898;
+  --roed: #ff003c;
+  --orange: #e94c06;
+  --sennepsgul: #f5b71f;
+  --turkis: #2caa9a;
+  --kongeblaa: #0d3b89;
+  --dybhavsblaa: #062344;
+  --lysegroen: #acd188;
+  --moerkegroen: #004832;
+  --font-body: "Barlow", sans-serif;
+  --font-display: "Barlow", sans-serif;
+  --content-width: 1840px;
+}
+
+/* Lokale Barlow-snit: vægtene matcher filernes indlejrede fontdata. */
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-BlackItalic.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Regular.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Black.ttf") format("truetype"); font-style: normal; font-weight: 600; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Black.ttf") format("truetype"); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-LightItalic.ttf") format("truetype"); font-style: normal; font-weight: 800; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-ExtraLightItalic.ttf") format("truetype"); font-style: italic; font-weight: 400; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Italic.ttf") format("truetype"); font-style: italic; font-weight: 500; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-BoldItalic.ttf") format("truetype"); font-style: italic; font-weight: 600; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url("../fonts/Barlow-Thin.ttf") format("truetype"); font-style: italic; font-weight: 800; font-display: swap; }
+
+/* Globale grundregler, typografi og tydeligt tastaturfokus. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  flex-direction: column;
+  margin: 0;
+  background: var(--raahvid);
+  color: var(--dybhavsblaa);
+  font-family: var(--font-body);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 4px;
+}
+
+/* Header med brand, aktuel sektion og navigation. */
+.site-header {
+  display: grid;
+  width: min(var(--content-width), calc(100% - 80px));
+  min-height: 78px;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  margin: 0 auto;
+  padding: 8px 22px;
+  border-radius: 20px;
+  background: var(--dybhavsblaa);
+  color: var(--hvid);
+}
+
+.brand {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand img {
+  display: block;
+  width: 150px;
+  height: auto;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -1.5px;
+}
+
+.brand-overline {
+  align-self: flex-end;
+  font-size: 6px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.header-title .eyebrow {
+  margin-bottom: 6px;
+}
+
+.header-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 8px;
+}
+
+.header-sound-control {
+  display: inline-flex;
+  width: 86px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 8px;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 10%);
+  color: var(--hvid);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-sound-control img {
+  display: block;
+  width: 18px;
+  height: 16px;
+}
+
+.header-language-control {
+  display: block;
+  width: 72px;
+  height: 40px;
+}
+
+/* Sidens hovedindhold og dets overordnede bredde. */
+main {
+  flex: 1;
+}
+
+.aquarium {
+  width: min(var(--content-width), calc(100% - 80px));
+  margin: 38px auto 42px;
+}
+
+/* Introduktionsteksten fordeles i to kolonner over fiskene. */
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr);
+  align-items: center;
+  gap: 44px;
+  margin-bottom: 18px;
+}
+
+.intro > div > .eyebrow {
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--turkis);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 12%;
+  text-transform: uppercase;
+}
+
+.eyebrow-red {
+  color: var(--roed);
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1,
+.featured-copy h2,
+.detail-copy h2 {
+  color: var(--dybhavsblaa);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 540px;
+  margin-bottom: 0;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.12;
+}
+
+/* Den korte hjælpetekst placeres til højre for sidens overskrift. */
+.intro-copy {
+  max-width: 360px;
+  justify-self: end;
+  margin: 14px 140px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+/* Hovedlayoutet viser den valgte fisk ved siden af artsoversigten. */
+.explorer-layout {
+  display: grid;
+  grid-template-columns: minmax(310px, 0.84fr) minmax(0, 1.25fr);
+  align-items: stretch;
+  gap: 26px;
+}
+
+.featured-fish {
+  position: relative;
+  display: flex;
+  min-height: 365px;
+  overflow: hidden;
+  align-items: flex-end;
+  border-radius: 22px;
+  background: var(--dybhavsblaa);
+  color: var(--hvid);
+}
+
+/* Foto og skygge fylder kortet; tekstindholdet ligger ovenpå. */
+.featured-image,
+.featured-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.featured-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.featured-shade {
+  background: linear-gradient(
+    180deg,
+    rgb(4 23 44 / 5%) 15%,
+    rgb(4 23 44 / 35%) 51%,
+    rgb(4 23 44 / 96%) 100%
+  );
+}
+
+.featured-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 24px 28px 20px;
+}
+
+.featured-copy .species {
+  margin-bottom: 8px;
+}
+
+.species {
+  color: var(--turkis);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.featured-copy h2 {
+  margin-bottom: 18px;
+  color: var(--hvid);
+  font-size: clamp(30px, 3.4vw, 43px);
+  line-height: 1.08;
+}
+
+.featured-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 17px;
+  font-size: 12px;
+}
+
+.featured-location strong {
+  font-weight: 700;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Primærknapper og billedknappen til den valgte fisks detaljer. */
+.button-primary {
+  padding: 7px 9px 7px 17px;
+  background: var(--orange);
+  color: var(--hvid);
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  background: #d83e00;
+}
+
+.button-arrow {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--hvid);
+  color: var(--orange);
+  font-size: 19px;
+}
+
+.meet-this-fish-button {
+  display: block;
+  width: 220px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.meet-this-fish-button:hover {
+  transform: translateY(-2px);
+}
+
+.meet-this-fish-button:focus-visible {
+  outline: 3px solid var(--turkis);
+  outline-offset: 4px;
+}
+
+.meet-this-fish-button img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Artsoversigtens overskrift, tæller og tredelte kortgitter. */
+.fish-directory {
+  min-width: 0;
+  padding-top: 4px;
+  position: relative;
+  top: -22px;
+}
+
+.directory-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 5px;
+}
+
+.directory-heading .eyebrow {
+  margin-bottom: 5px;
+}
+
+.directory-heading h2 {
+  margin-bottom: 0;
+  color: var(--dybhavsblaa);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.fish-count {
+  margin-bottom: 4px;
+  margin-right: 24px;
+  color: var(--roed);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 12%;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.fish-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fish-list-item,
+.fish-card-article {
+  min-width: 0;
+}
+
+/* Billedkort med fiskenavn, latinsk navn og farvemarkeret artsnummer. */
+.fish-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(185px, 23.5vh, 254px);
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 3px solid var(--hvid);
+  border-radius: 18px;
+  background: var(--dybhavsblaa);
+  color: var(--hvid);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.fish-card:hover {
+  transform: translateY(-3px);
+}
+
+.fish-card[aria-pressed="true"] {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px var(--orange);
+}
+
+.fish-card img,
+.fish-card-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fish-card img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 250ms ease;
+}
+
+.fish-card:hover img {
+  transform: scale(1.06);
+}
+
+.fish-card-shade {
+  background: linear-gradient(
+    180deg,
+    rgb(5 32 61 / 0%) 35%,
+    rgb(5 32 61 / 72%) 100%
+  );
+}
+
+.fish-card-number {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 0 13px 0 14px;
+  background: var(--fish-color);
+  color: var(--dybhavsblaa);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.fish-card-copy {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  color: var(--hvid);
+  text-shadow: 0 1px 4px rgb(4 23 44 / 85%);
+}
+
+.fish-card-species {
+  color: var(--turkis);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.fish-card-copy strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+/* Tunnelens fisk svømmer i individuelle baner og hastigheder. */
+.bund-tunnel {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.bundfisk {
+  position: absolute;
+  top: var(--swim-top);
+  left: -100px;
+  display: block;
+  width: var(--swim-width);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  animation: svoemForbi var(--swim-duration) linear var(--swim-delay) infinite;
+}
+
+.bundfisk--en {
+  --swim-top: 12px;
+  --swim-width: 90px;
+  --swim-duration: 13s;
+  --swim-delay: -2.9s;
+}
+
+.bundfisk--to {
+  --swim-top: 82px;
+  --swim-width: 72px;
+  --swim-duration: 18s;
+  --swim-delay: -8.2s;
+}
+
+.bundfisk--tre {
+  --swim-top: 48px;
+  --swim-width: 108px;
+  --swim-duration: 21s;
+  --swim-delay: -15.6s;
+}
+
+.bundfisk--fire {
+  --swim-top: 110px;
+  --swim-width: 64px;
+  --swim-duration: 15s;
+  --swim-delay: -5.1s;
+}
+
+.bundfisk--fem {
+  --swim-top: 22px;
+  --swim-width: 76px;
+  --swim-duration: 17s;
+  --swim-delay: -11.4s;
+}
+
+.bundfisk--seks {
+  --swim-top: 75px;
+  --swim-width: 98px;
+  --swim-duration: 23s;
+  --swim-delay: -19.2s;
+}
+
+.bundfisk img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scaleX(-1);
+}
+
+/* Hover giver et lille vrik; klik starter den særskilte flugtanimation. */
+.bundfisk:not(.bundfisk--skraemt):hover img {
+  animation: fishWiggle 450ms ease-in-out infinite alternate;
+}
+
+.bundfisk--skraemt {
+  z-index: 2;
+  animation: fishEscape 900ms cubic-bezier(0.2, 0.75, 0.25, 1) 220ms forwards;
+}
+
+.bundfisk--skraemt img {
+  pointer-events: none;
+  animation: fishStartle 620ms ease-in-out both;
+}
+
+/* Gentagne baner for svømning, og korte bevægelser ved hover og flugt. */
+@keyframes svoemForbi {
+  0% {
+    left: -100px;
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    left: 100%;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fishWiggle {
+  to {
+    transform: scaleX(-1) translateY(-5px) rotate(-3deg);
+  }
+}
+
+@keyframes fishStartle {
+  0% {
+    transform: scaleX(-1) rotate(0) translateY(0);
+  }
+
+  22% {
+    transform: scaleX(-1) rotate(-9deg) translateY(-7px);
+  }
+
+  48% {
+    transform: scaleX(-1) rotate(8deg) translateY(3px);
+  }
+
+  70% {
+    transform: scaleX(-1) rotate(-5deg) translateY(-3px);
+  }
+
+  100% {
+    transform: var(--escape-flip) rotate(0) translateY(0);
+  }
+}
+
+@keyframes fishEscape {
+  0% {
+    left: var(--escape-start-left);
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.08) rotate(-8deg);
+  }
+
+  100% {
+    left: var(--escape-end-left);
+    opacity: 0;
+    transform: translateY(-95px) scale(0.72) rotate(-15deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bundfisk {
+    animation-duration: 30s;
+  }
+}
+
+/* Detaljevinduet opdeles i et stort foto og en kolonne med fakta. */
+.fish-dialog {
+  width: min(1108px, calc(100vw - 48px));
+  max-width: none;
+  height: min(693px, calc(100vh - 48px));
+  max-height: none;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--hvid);
+  color: var(--dybhavsblaa);
+  box-shadow: 0 24px 90px rgb(0 0 0 / 30%);
+}
+
+.fish-dialog::backdrop {
+  background: rgb(5 32 61 / 82%);
+}
+
+.detail-panel {
+  position: relative;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 52% 48%;
+  overflow: hidden;
+}
+
+/* Fotoet tones gradvist over i den hvide faktakolonne. */
+.detail-photo {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  background: var(--dybhavsblaa);
+}
+
+.detail-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.detail-photo::after {
+  position: absolute;
+  inset: 0 -1px 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent 69%,
+    rgb(255 255 255 / 44%) 83%,
+    var(--hvid) 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.detail-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: 76px 60px 30px 54px;
+  background: var(--hvid);
+}
+
+/* Fakta vises som en lodret, letlæselig liste. */
+.detail-copy .species {
+  margin-bottom: 10px;
+  color: var(--dybhavsblaa);
+}
+
+.detail-copy h2 {
+  margin-bottom: 48px;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.08;
+}
+
+.detail-copy > .eyebrow {
+  margin-bottom: 14px;
+}
+
+.detail-fact {
+  margin-bottom: 62px;
+  color: var(--moerkegraa);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.detail-attributes {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 0 34px;
+}
+
+.detail-attributes div {
+  min-width: 0;
+}
+
+.detail-attributes dt {
+  margin-bottom: 8px;
+  color: var(--kongeblaa);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.detail-attribute-icon {
+  color: var(--turkis);
+}
+
+.detail-attributes dd {
+  overflow-wrap: anywhere;
+  margin: 0;
+  color: var(--dybhavsblaa);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.detail-done {
+  width: 100%;
+  min-height: 60px;
+  margin-top: auto;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 15px;
+}
+
+.dialog-close {
+  position: absolute;
+  z-index: 2;
+  top: 28px;
+  left: 26px;
+  display: grid;
+  width: 53px;
+  height: 53px;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: var(--orange);
+  color: var(--hvid);
+  cursor: pointer;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.detail-panel .detail-copy .detail-done {
+  flex-shrink: 0;
+}
+
+/* Bevarer semantiske overskrifter og billedtekster uden at ændre layoutet. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

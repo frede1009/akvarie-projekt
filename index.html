@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mød fiskene i Storcenter Nords akvarium, og lær mere om livet under overfladen."
+    />
+    <title>Akvariet i NORD · Storcenter NORD</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <!-- HEADER: logo, sidens navn og de visuelle lyd- og sprogikoner. -->
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Storcenter NORD - forsiden">
+        <img
+          src="icons/storcenternordlogo.svg"
+          alt="Storcenter NORD"
+          width="132"
+          height="50"
+        />
+      </a>
+      <p class="header-title">
+        <span class="eyebrow">Du udforsker</span>
+        <span>Akvariet i NORD</span>
+      </p>
+      <div class="header-actions" aria-hidden="true">
+        <span class="header-sound-control">
+          <img src="icons/SF Symbol/speaker.wave.2.fill.svg" alt="" />
+          <span>LYD TIL</span>
+        </span>
+        <img
+          class="header-language-control"
+          src="icons/Language button.svg"
+          alt=""
+        />
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Overskrift og intro -->
+      <section class="aquarium" id="akvariet" aria-labelledby="page-title">
+        <header class="intro">
+          <div>
+            <p class="eyebrow eyebrow-red">Mød dine naboer</p>
+            <h1 id="page-title">Hvem svømmer ved siden af dig?</h1>
+          </div>
+          <p class="intro-copy">
+            Mød fiskene i Storcenter Nords akvarium, og lær mere om livet under overfladen.
+          </p>
+        </header>
+
+        <!-- Valgt fisk til venstre og alle arter til højre. -->
+        <div class="explorer-layout">
+          <!-- Dette felt opdateres af JavaScript, når gæsten vælger en fisk. -->
+          <article class="featured-fish" aria-labelledby="featured-name">
+            <img class="featured-image" id="featured-image" src="" alt="" />
+            <div class="featured-shade" aria-hidden="true"></div>
+            <div class="featured-copy">
+              <p class="species" id="featured-species"></p>
+              <h2 id="featured-name"></h2>
+              <p class="featured-location">
+                <span aria-hidden="true">📍</span>
+                <strong>Find den:</strong>
+                <span id="featured-location"></span>
+              </p>
+              <button class="meet-this-fish-button" id="featured-details" type="button">
+                <img src="icons/Meet this fish button.svg" alt="" aria-hidden="true" />
+              </button>
+            </div>
+          </article>
+
+          <!-- JavaScript indsætter et semantisk kort for hver fisk i listen. -->
+          <section class="fish-directory" aria-labelledby="directory-title">
+            <div class="directory-heading">
+              <div>
+                <p class="eyebrow eyebrow-red">Tryk på en fisk</p>
+                <h2 id="directory-title">Hvem gemmer sig i revet?</h2>
+              </div>
+              <p class="fish-count">6 arter</p>
+            </div>
+            <ul
+              class="fish-grid"
+              id="fish-grid"
+              aria-label="Fisk i akvariet"
+            ></ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- TUNNEL: klik på en af de dekorative, animerede fisk for at skræmme den. -->
+    <section class="bund-tunnel" aria-labelledby="tunnel-title">
+      <h2 class="visually-hidden" id="tunnel-title">Fiskene svømmer i tunnelen</h2>
+      <button
+        class="bundfisk bundfisk--en"
+        type="button"
+        aria-label="Skræm tunnel-fisk 1 væk"
+      >
+        <img src="images/tunnel-fisk-1.svg" alt="" />
+      </button>
+      <button
+        class="bundfisk bundfisk--to"
+        type="button"
+        aria-label="Skræm tunnel-fisk 2 væk"
+      >
+        <img src="images/tunnel-fisk-2.svg" alt="" />
+      </button>
+      <button
+        class="bundfisk bundfisk--tre"
+        type="button"
+        aria-label="Skræm tunnel-fisk 3 væk"
+      >
+        <img src="images/tunnel-fisk-1.svg" alt="" />
+      </button>
+      <button
+        class="bundfisk bundfisk--fire"
+        type="button"
+        aria-label="Skræm tunnel-fisk 4 væk"
+      >
+        <img src="images/tunnel-fisk-2.svg" alt="" />
+      </button>
+      <button
+        class="bundfisk bundfisk--fem"
+        type="button"
+        aria-label="Skræm tunnel-fisk 5 væk"
+      >
+        <img src="images/tunnel-fisk-1.svg" alt="" />
+      </button>
+      <button
+        class="bundfisk bundfisk--seks"
+        type="button"
+        aria-label="Skræm tunnel-fisk 6 væk"
+      >
+        <img src="images/tunnel-fisk-2.svg" alt="" />
+      </button>
+    </section>
+
+    <!-- DETALJEDIALOG: JavaScript udfylder foto, sjov fakta og artsoplysninger. -->
+    <dialog class="fish-dialog" id="fish-dialog" aria-labelledby="detail-name">
+      <article class="detail-panel">
+        <button
+          class="dialog-close"
+          id="dialog-close"
+          type="button"
+          aria-label="Luk fiskedetaljer"
+        >
+          ×
+        </button>
+        <figure class="detail-photo">
+          <img id="detail-image" src="" alt="" />
+          <figcaption class="visually-hidden" id="detail-caption"></figcaption>
+        </figure>
+        <section class="detail-copy" aria-label="Fakta om fisken">
+          <p class="species" id="detail-species"></p>
+          <h2 id="detail-name"></h2>
+          <p class="eyebrow eyebrow-red">Vidste du at...</p>
+          <p class="detail-fact" id="detail-fact"></p>
+          <dl class="detail-attributes" id="detail-attributes"></dl>
+          <button class="button button-primary detail-done" id="detail-done" type="button">
+            Se om du kan finde den i akvariet!
+          </button>
+        </section>
+      </article>
+    </dialog>
+  </body>
+</html>
